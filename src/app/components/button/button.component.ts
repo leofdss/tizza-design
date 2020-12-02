@@ -34,7 +34,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   @Input() color: string | undefined;
-  currentColor = 'basic';
+  currentColor = 'default';
   colors = [
     'primary',
     'success',
@@ -94,7 +94,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'stroked': {
-        if (this.currentColor) {
+        if (this.currentColor !== 'default') {
           this.el.nativeElement.style.color = this.el.nativeElement.style.backgroundColor;
           this.el.nativeElement.style.backgroundColor = 'rgba(0, 0, 0, 0)';
         } else {
@@ -105,7 +105,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
       case 'basic': {
-        if (this.currentColor) {
+        if (this.currentColor !== 'default') {
           this.el.nativeElement.style.color = this.el.nativeElement.style.backgroundColor;
         }
         this.el.nativeElement.style.border = 'rgba(0, 0, 0, 0)';
