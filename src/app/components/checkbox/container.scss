@@ -1,0 +1,13 @@
+.container {
+  transition: 0.5s;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0px;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  max-width: 320px;
+  li {
+    margin: 16px 0;
+    position: relative;
+  }
+}

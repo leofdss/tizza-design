@@ -1,0 +1,194 @@
+<tz-toolbar>
+  <div style="margin-left: 10px">Header</div>
+  <div class="spacer"></div>
+  <tz-change-theme style="margin-right: 10px"> Change Theme</tz-change-theme>
+</tz-toolbar>
+
+<div style="width: 50%; margin: 10px" fxLayout="column" fxLayoutGap="10px">
+  <tz-card>
+    <form [formGroup]="form">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <tz-form-field>
+          <label>Text</label>
+          <input tzInput type="text" placeholder="text.." formControlName="text" />
+        </tz-form-field>
+        <tz-form-field>
+          <label>Text Disabled</label>
+          <input tzInput type="text" placeholder="text.." formControlName="textDisabled" />
+        </tz-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="10px">
+        <tz-form-field>
+          <label>Password</label>
+          <input tzInput type="password" placeholder="password" formControlName="password" />
+        </tz-form-field>
+        <tz-form-field>
+          <label>Number</label>
+          <input tzInput type="number" formControlName="number" width="100px" />
+        </tz-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="10px">
+        <tz-form-field>
+          <label>Date</label>
+          <input tzInput type="date" placeholder="date" formControlName="date" />
+        </tz-form-field>
+        <tz-form-field>
+          <label>Time</label>
+          <input tzInput type="time" placeholder="time" formControlName="time" />
+        </tz-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <tz-form-field>
+          <label>Text area</label>
+          <textarea tzInput placeholder="text area" formControlName="textarea" width="100%" height="100px"></textarea>
+        </tz-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <div>
+          <tz-checkbox formControlName="checkbox">checkbox</tz-checkbox>
+          <tz-checkbox formControlName="checkboxIndeterminate" [indeterminate]="true">checkbox indeterminate
+          </tz-checkbox>
+          <tz-switch formControlName="switch">Switch</tz-switch>
+
+          <tz-radio-group name="radio" formControlName="radio">
+            <tz-radio value="opcao1">Radio 1</tz-radio>
+            <tz-radio value="opcao2">Radio 2</tz-radio>
+            <tz-radio value="opcao3">Radio 3</tz-radio>
+          </tz-radio-group>
+        </div>
+        <div>
+          <tz-checkbox formControlName="checkboxDisabled">checkbox</tz-checkbox>
+          <tz-switch formControlName="switchDisabled">Switch</tz-switch>
+          <tz-radio-group name="radioDisabled" formControlName="radioDisabled">
+            <tz-radio value="opcao1">Radio 1</tz-radio>
+            <tz-radio value="opcao2">Radio 2</tz-radio>
+          </tz-radio-group>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <button type="reset" color="" tzButton>Reset</button>
+        <button type="submit" (click)="onSubmit()" tzButton>Submit</button>
+      </div>
+    </form>
+  </tz-card>
+
+  <tz-card>
+    <section>
+      <span>
+        <tz-checkbox [(ngModel)]="allComplete" [indeterminate]="someComplete()" (ngModelChange)="setAll($event)">
+          {{ task.name }}
+        </tz-checkbox>
+      </span>
+      <span>
+        <ul>
+          <li *ngFor="let subtask of task.subtasks">
+            <tz-checkbox [(ngModel)]="subtask.completed" [color]="subtask.color" (ngModelChange)="updateAllComplete()">
+              {{ subtask.name }}
+            </tz-checkbox>
+          </li>
+        </ul>
+      </span>
+    </section>
+  </tz-card>
+
+  <tz-card>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <span>Retangle</span>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Flat</span>
+        <button tzButton>Basic</button>
+        <button tzButton color="primary">Primary</button>
+        <button tzButton color="success">Success</button>
+        <button tzButton color="info">Info</button>
+        <button tzButton color="warning">Warning</button>
+        <button tzButton color="danger">Danger</button>
+        <button tzButton disabled>Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank">Link</a>
+      </div>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Stroked</span>
+        <button tzButton border="stroked">Basic</button>
+        <button tzButton color="primary" border="stroked">Primary</button>
+        <button tzButton color="success" border="stroked">Success</button>
+        <button tzButton color="info" border="stroked">Info</button>
+        <button tzButton color="warning" border="stroked">Warning</button>
+        <button tzButton color="danger" border="stroked">Danger</button>
+        <button tzButton disabled border="stroked">Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" border="stroked">Link</a>
+      </div>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Basic</span>
+        <button tzButton border="basic">Basic</button>
+        <button tzButton color="primary" border="basic">Primary</button>
+        <button tzButton color="success" border="basic">Success</button>
+        <button tzButton color="info" border="basic">Info</button>
+        <button tzButton color="warning" border="basic">Warning</button>
+        <button tzButton color="danger" border="basic">Danger</button>
+        <button tzButton disabled border="basic">Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" border="basic">Link</a>
+      </div>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Raised</span>
+        <button tzButton border="raised">Basic</button>
+        <button tzButton color="primary" border="raised">Primary</button>
+        <button tzButton color="success" border="raised">Success</button>
+        <button tzButton color="info" border="raised">Info</button>
+        <button tzButton color="warning" border="raised">Warning</button>
+        <button tzButton color="danger" border="raised">Danger</button>
+        <button tzButton disabled border="raised">Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" border="raised">Link</a>
+      </div>
+    </div>
+  </tz-card>
+  <tz-card>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <span>Round</span>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Flat</span>
+        <button tzButton shape="round">Basic</button>
+        <button tzButton shape="round" color="primary">Primary</button>
+        <button tzButton shape="round" color="success">Success</button>
+        <button tzButton shape="round" color="info">Info</button>
+        <button tzButton shape="round" color="warning">Warning</button>
+        <button tzButton shape="round" color="danger">Danger</button>
+        <button tzButton shape="round" disabled>Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" shape="round">Link</a>
+      </div>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Stroked</span>
+        <button tzButton shape="round" border="stroked">Basic</button>
+        <button tzButton shape="round" color="primary" border="stroked">Primary</button>
+        <button tzButton shape="round" color="success" border="stroked">Success</button>
+        <button tzButton shape="round" color="info" border="stroked">Info</button>
+        <button tzButton shape="round" color="warning" border="stroked">Warning</button>
+        <button tzButton shape="round" color="danger" border="stroked">Danger</button>
+        <button tzButton disabled shape="round" border="stroked">Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" shape="round" border="stroked">Link</a>
+      </div>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Basic</span>
+        <button tzButton shape="round" border="basic">Basic</button>
+        <button tzButton shape="round" color="primary" border="basic">Primary</button>
+        <button tzButton shape="round" color="success" border="basic">Success</button>
+        <button tzButton shape="round" color="info" border="basic">Info</button>
+        <button tzButton shape="round" color="warning" border="basic">Warning</button>
+        <button tzButton shape="round" color="danger" border="basic">Danger</button>
+        <button tzButton disabled shape="round" border="basic">Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" shape="round" border="basic">Link</a>
+      </div>
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+        <span>Raised</span>
+        <button tzButton shape="round" border="raised">Basic</button>
+        <button tzButton shape="round" color="primary" border="raised">Primary</button>
+        <button tzButton shape="round" color="success" border="raised">Success</button>
+        <button tzButton shape="round" color="info" border="raised">Info</button>
+        <button tzButton shape="round" color="warning" border="raised">Warning</button>
+        <button tzButton shape="round" color="danger" border="raised">Danger</button>
+        <button tzButton disabled shape="round" border="raised">Disabled</button>
+        <a tzButton href="https://www.google.com/" target="_blank" shape="round" border="raised">Link</a>
+      </div>
+    </div>
+  </tz-card>
+</div>
