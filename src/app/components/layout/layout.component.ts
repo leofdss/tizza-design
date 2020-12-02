@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Theme, ThemeService } from '../theme.service';
@@ -31,16 +31,19 @@ export class LayoutComponent implements OnDestroy {
   theme: Theme;
   sub = new Subscription();
 
-  constructor(private ref: ChangeDetectorRef, private themeService: ThemeService) {
+  constructor(private ref: ChangeDetectorRef, private themeService: ThemeService, private renderer: Renderer2) {
     this.theme = this.themeService.getTheme();
     this.changeTheme();
   }
 
   changeTheme() {
     this.sub.add(this.themeService.changeTheme().subscribe((theme: Theme) => {
+      console.log('asdasd')
       this.theme = theme;
-      document.body.style.backgroundColor = theme.value.background;
-      document.body.style.fontFamily = '\'Ubuntu\', sans-serif';
+      this.renderer.setAttribute(document.body, 'style', `
+      background-color: ${theme.value.background};
+      font-family: \'Ubuntu\', sans-serif;
+      `);
       this.ref.detectChanges();
     }));
   }
