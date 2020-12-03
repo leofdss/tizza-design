@@ -16,6 +16,7 @@ export class ButtonDirective implements OnInit, AfterViewInit, OnDestroy {
   theme: Theme | undefined;
   sub = new Subscription();
   player: AnimationPlayer | undefined;
+  playerOn = false;
   @Input() type: string | undefined;
 
   @Input() borderStyle: string | undefined;
@@ -213,6 +214,11 @@ export class ButtonDirective implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('click', ['$event'])
   onClick(): void {
-    this.player?.play();
+    if (this.playerOn) {
+      this.player?.restart();
+    } else {
+      this.playerOn = true;
+      this.player?.play();
+    }
   }
 }
