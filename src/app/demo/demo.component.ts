@@ -41,12 +41,6 @@ export class DemoComponent implements OnInit {
   });
   allComplete = false;
 
-  ngOnInit() { }
-
-  onSubmit() {
-    console.log(this.form?.value);
-  }
-
   task: Task = {
     name: 'Indeterminate',
     completed: false,
@@ -60,7 +54,13 @@ export class DemoComponent implements OnInit {
     ]
   };
 
-  updateAllComplete() {
+  ngOnInit(): void { }
+
+  onSubmit(): void {
+    console.log(this.form?.value);
+  }
+
+  updateAllComplete(): void {
     this.allComplete = !!(this.task?.subtasks?.every(t => t.completed));
   }
 
@@ -71,7 +71,7 @@ export class DemoComponent implements OnInit {
     return this.task?.subtasks?.filter(t => t.completed)?.length > 0 && !this.allComplete;
   }
 
-  setAll(completed: boolean) {
+  setAll(completed: boolean): void {
     this.task.subtasks?.forEach(subtask => subtask.completed = completed);
   }
 }

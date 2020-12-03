@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Theme, ThemeService } from '../theme.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-radio',
   template: `
   <div class="container" [style.color]="theme?.value?.title" (click)="onValue()">
@@ -52,12 +53,12 @@ export class RadioComponent implements OnInit, OnDestroy {
 
   constructor(private ref: ChangeDetectorRef, private themeService: ThemeService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setTheme();
     this.changeTheme();
   }
 
-  setTheme() {
+  setTheme(): void {
     this.theme = this.themeService.getTheme();
     if (this.color && this.colors.indexOf(this.color) !== -1) {
       this.currentColor = this.color;
@@ -86,18 +87,18 @@ export class RadioComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeTheme() {
+  changeTheme(): void {
     this.sub.add(this.themeService.changeTheme().subscribe((theme: Theme) => {
       this.theme = theme;
       this.ref.detectChanges();
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  onValue() {
+  onValue(): void {
     this.emitter?.emit(this.value);
   }
 }

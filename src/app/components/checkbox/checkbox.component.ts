@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -6,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Theme, ThemeService } from '../theme.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-checkbox',
   template: `
   <div class="container" [style.color]="theme?.value?.title">
@@ -59,12 +59,12 @@ export class CheckboxComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private ref: ChangeDetectorRef, private themeService: ThemeService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.changeTheme();
     this.setTheme();
   }
 
-  setTheme() {
+  setTheme(): void {
     this.theme = this.themeService.getTheme();
     if (this.color && this.colors.indexOf(this.color) !== -1) {
       this.currentColor = this.color;
@@ -93,7 +93,7 @@ export class CheckboxComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  changeTheme() {
+  changeTheme(): void {
     this.sub.add(this.themeService.changeTheme().subscribe((theme: Theme) => {
       this.theme = theme;
       this.setTheme();
@@ -101,11 +101,11 @@ export class CheckboxComponent implements OnInit, OnDestroy, OnChanges {
     }));
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.ref.detectChanges();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ref.detectChanges();
     this.sub.unsubscribe();
   }
@@ -125,11 +125,11 @@ export class CheckboxComponent implements OnInit, OnDestroy, OnChanges {
     this.onTouch = fn;
     this.ref.detectChanges();
   }
-  writeValue(input: boolean) {
+  writeValue(input: boolean): void {
     this.input = !!input;
     this.ref.detectChanges();
   }
-  setDisabledState(isDisabled: boolean) {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.ref.detectChanges();
   }

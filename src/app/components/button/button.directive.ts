@@ -6,9 +6,10 @@ import { Subscription } from 'rxjs';
 import { Theme, ThemeService } from '../theme.service';
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[tzButton]'
 })
-export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ButtonDirective implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(@Self() private el: ElementRef, private themeService: ThemeService, private builder: AnimationBuilder) { }
 
@@ -17,7 +18,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
   player: AnimationPlayer | undefined;
   @Input() type: string | undefined;
 
-  @Input() border: string | undefined;
+  @Input() borderStyle: string | undefined;
   currentBorder = 'flat';
   borders = [
     'flat',
@@ -48,7 +49,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     this.changeTheme();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     if (this.el.nativeElement.disabled) {
       this.el.nativeElement.style.cursor = 'not-allowed';
       this.el.nativeElement.style.opacity = '0.4';
@@ -56,11 +57,11 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     this.buildAnimation();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  setDefault() {
+  setDefault(): void {
     this.el.nativeElement.style.outline = 'none';
     this.el.nativeElement.style.minWidth = 'max-content';
     this.el.nativeElement.style.width = '30px';
@@ -75,7 +76,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     this.el.nativeElement.style.transition = 'border 0.5s, color 0.5s, background-color 0.5s';
   }
 
-  setChape() {
+  setChape(): void {
     switch (this.currentShape) {
       case 'retangle': {
         this.el.nativeElement.style.borderRadius = '4px';
@@ -88,7 +89,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  setBorder() {
+  setBorder(): void {
     switch (this.currentBorder) {
       case 'flat': {
         break;
@@ -121,7 +122,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  setColor() {
+  setColor(): void {
     switch (this.currentColor) {
       case 'primary': {
         this.el.nativeElement.style.backgroundColor = this.theme?.value.primary;
@@ -162,10 +163,10 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  initTheme() {
+  initTheme(): void {
     this.setDefault();
-    if (this.border && this.borders.indexOf(this.border) !== -1) {
-      this.currentBorder = this.border;
+    if (this.borderStyle && this.borders.indexOf(this.borderStyle) !== -1) {
+      this.currentBorder = this.borderStyle;
     }
     if (this.shape && this.shapes.indexOf(this.shape) !== -1) {
       this.currentShape = this.shape;
@@ -180,20 +181,20 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     this.setTheme();
   }
 
-  setTheme() {
+  setTheme(): void {
     this.theme = this.themeService.getTheme();
     this.setColor();
     this.setBorder();
     this.setChape();
   }
 
-  changeTheme() {
+  changeTheme(): void {
     this.sub.add(this.themeService.changeTheme().subscribe(() => {
       this.setTheme();
     }));
   }
 
-  buildAnimation() {
+  buildAnimation(): void {
     const animationFactory = this.el.nativeElement.style.backgroundColor !== 'rgba(0, 0, 0, 0)' ?
       this.builder.build([
         animate(800, keyframes([
@@ -211,7 +212,7 @@ export class ButtonComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostListener('click', ['$event'])
-  onClick() {
+  onClick(): void {
     this.player?.play();
   }
 }

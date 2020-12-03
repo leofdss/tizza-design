@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Theme, ThemeService } from '../theme.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-toolbar',
   template: `
     <div
@@ -79,14 +80,14 @@ export class ToolbarComponent implements OnDestroy {
     window.onscroll = () => { this.scrollFunction(); };
   }
 
-  changeTheme() {
+  changeTheme(): void {
     this.sub.add(this.themeService.changeTheme().subscribe((theme: Theme) => {
       this.theme = theme;
       this.ref.detectChanges();
     }));
   }
 
-  scrollFunction() {
+  scrollFunction(): void {
     if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
       this.isFloating = true;
     } else {
@@ -95,7 +96,7 @@ export class ToolbarComponent implements OnDestroy {
     this.ref.detectChanges();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 }

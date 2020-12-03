@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Theme, ThemeService } from '../theme.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-form-field',
   template: `
     <div class="form-field">
@@ -23,14 +24,14 @@ export class FormFieldComponent implements OnDestroy {
     this.changeTheme();
   }
 
-  changeTheme() {
+  changeTheme(): void {
     this.sub.add(this.themeService.changeTheme().subscribe((theme: Theme) => {
       this.theme = theme;
       this.ref.detectChanges();
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 }

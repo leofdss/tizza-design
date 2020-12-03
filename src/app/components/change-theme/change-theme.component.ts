@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ThemeService } from '../theme.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-change-theme',
   template: `
   <tz-switch [formControl]="form"><ng-content></ng-content></tz-switch>
@@ -36,7 +37,7 @@ export class ChangeThemeComponent implements OnInit, OnDestroy {
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 }

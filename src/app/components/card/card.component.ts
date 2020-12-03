@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { Theme, ThemeService } from '../theme.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-card',
   template: `
-    <div 
+    <div
       class="card"
       [style.background-color]="theme?.value?.card"
       [style.color]="theme?.value?.title"
@@ -36,14 +37,14 @@ export class CardComponent implements OnDestroy {
     this.changeTheme();
   }
 
-  changeTheme() {
+  changeTheme(): void {
     this.sub.add(this.themeService.changeTheme().subscribe((theme: Theme) => {
       this.theme = theme;
       this.ref.detectChanges();
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 }

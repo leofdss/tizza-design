@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ButtonComponent } from './button.component';
+import { ButtonDirective } from './button.directive';
 
 @NgModule({
-  declarations: [ButtonComponent],
+  declarations: [ButtonDirective],
   imports: [
     CommonModule,
     BrowserAnimationsModule
   ],
-  exports: [ButtonComponent]
+  exports: [ButtonDirective]
 })
 export class ButtonModule { }

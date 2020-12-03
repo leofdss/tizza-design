@@ -13,7 +13,7 @@ interface ThemeValue {
   invertDanger: string;
 
   background: string;
-  focus: string,
+  focus: string;
   card: string;
   icon: string;
   title: string;
@@ -92,14 +92,14 @@ export class ThemeService {
     this.setBackground();
   }
 
-  setBackground() {
+  setBackground(): void {
     document.body.style.backgroundColor = this.getTheme().value.background;
     setTimeout(() => {
       document.body.style.transition = '0.5s';
     }, 10);
   }
 
-  setTheme(themeName: string) {
+  setTheme(themeName: string): string {
     if (themeName) {
       this.themeName = themeName;
     } else {
@@ -113,24 +113,28 @@ export class ThemeService {
         value: theme
       });
     }
+    return themeName;
   }
 
-  changeTheme() {
+  changeTheme(): EventEmitter<Theme> {
     return this.themeChange;
   }
 
-  getTheme() {
+  getTheme(): Theme {
     return {
       name: this.themeName,
       value: this.themeName ? this.themes.get(this.themeName) : null
     } as Theme;
   }
 
-  getThemesName() {
+  getThemesName(): string[] {
     return this.themesName;
   }
 
-  getThemeName() {
-    return this.themeName;
+  getThemeName(): string {
+    if (this.themeName) {
+      return this.themeName;
+    }
+    return this.setTheme('');
   }
 }

@@ -1,11 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, Input, OnDestroy, QueryList } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  QueryList
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { RadioComponent } from './radio.component';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'tz-radio-group',
   template: `
     <div>
@@ -30,8 +41,9 @@ export class RadioGroupComponent implements AfterContentInit, OnDestroy {
   disabled: boolean | undefined;
   emitter = new EventEmitter<boolean | string | number>();
   sub = new Subscription();
+  input: any;
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     this.radios?.forEach((radio: RadioComponent) => {
       radio.emitter = this.emitter;
       radio.name = this.name ? this.name : '';
@@ -49,7 +61,7 @@ export class RadioGroupComponent implements AfterContentInit, OnDestroy {
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
@@ -68,12 +80,11 @@ export class RadioGroupComponent implements AfterContentInit, OnDestroy {
     this.onTouch = fn;
     this.ref.detectChanges();
   }
-  input: any;
-  writeValue(input: any) {
+  writeValue(input: any): void {
     this.input = input;
     this.ref.detectChanges();
   }
-  setDisabledState(isDisabled: boolean) {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.ref.detectChanges();
   }
