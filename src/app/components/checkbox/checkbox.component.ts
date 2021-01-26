@@ -10,7 +10,7 @@ import { Theme, ThemeService } from '../theme.service';
   template: `
   <div class="container" [style.color]="theme?.value?.title">
     <input type="checkbox"
-      [indeterminate]="indeterminate"
+      [indeterminate]="indeterminate && !input"
       [(ngModel)]="input"
       (ngModelChange)="onChange($event)"
       (blur)="onTouch()"
@@ -126,7 +126,7 @@ export class CheckboxComponent implements OnInit, OnDestroy, OnChanges {
     this.ref.detectChanges();
   }
   writeValue(input: boolean): void {
-    this.input = !!input;
+    this.input = !!input && !this.indeterminate;
     this.ref.detectChanges();
   }
   setDisabledState(isDisabled: boolean): void {

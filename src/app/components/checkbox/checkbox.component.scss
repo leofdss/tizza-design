@@ -92,6 +92,7 @@
       }
     }
     &:checked {
+      --r: 43deg;
       &:after {
         width: 5px;
         height: 9px;
@@ -102,9 +103,6 @@
         top: 2px;
         transform: rotate(var(--r, 20deg));
       }
-    }
-    &:checked {
-      --r: 43deg;
     }
   }
 }
