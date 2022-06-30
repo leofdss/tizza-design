@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "tizza-design"
+  "defaultProject": "tizza-design",
+  "cli": {
+    "analytics": "424f482f-83fd-4dc0-a79d-76bfd1a7b98c"
+  }
 }

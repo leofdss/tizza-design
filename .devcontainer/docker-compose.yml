@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: 14-bullseye
+    command: sleep infinity
+
+    volumes:
+      - ..:/workspace:cached
+    network_mode: host
+
+volumes:
+  postgres-data: null
